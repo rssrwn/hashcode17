@@ -26,4 +26,11 @@ public class Endpoint {
     public int getId() {
         return id;
     }
+
+    public int getVideoScore(Video video, Cache cache) {
+        int latToEndpoint = latencyToCache.get(cache);
+        int latDiff = latencyToDataCenter - latToEndpoint;
+        int numVideoRequests = videoRequests.get(video);
+        return latDiff * numVideoRequests;
+    }
 }
