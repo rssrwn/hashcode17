@@ -70,4 +70,10 @@ public class Cache {
                 .sum();
     }
 
+    private List<Video> getVideos() {
+        return videoMap.entrySet().stream()
+                .map(e -> e.getKey())
+                .collect(Collectors.toList());
+    }
+
 }

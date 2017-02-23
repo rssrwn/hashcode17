@@ -50,5 +50,5 @@ public class Endpoint {
         List<Cache> returnlist = latencyToCache.entrySet().stream().sorted(Map.Entry.comparingByValue()).map(e -> e.getKey()).collect(Collectors.toList());
         return returnlist;
     }
-    
+
 }
