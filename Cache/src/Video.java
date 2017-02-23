@@ -8,6 +8,10 @@ public class Video {
         this.size = size;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public int getId() {
         return id;
     }
