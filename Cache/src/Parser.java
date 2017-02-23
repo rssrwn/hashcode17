@@ -10,7 +10,6 @@ public class Parser {
     private Map<Integer, Endpoint> endpoints;
 
     public Parser(String locIn) throws FileNotFoundException {
-        System.out.println(locIn);
         this.scanner = new Scanner(new File(locIn));
         this.caches = new HashMap<>();
         this.videos = new HashMap<>();
@@ -57,6 +56,7 @@ public class Parser {
             Video currentVid = videos.get(videoNo);
             currentEndPoint.addVidReq(currentVid,req);
         }
+        System.out.println();
     }
 
 }
