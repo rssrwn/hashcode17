@@ -1,5 +1,8 @@
+import com.sun.org.apache.xml.internal.security.algorithms.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.*;
 
 public class Parser {
@@ -9,6 +12,7 @@ public class Parser {
   private Map<Integer, Video> videos;
   private Map<Integer, Endpoint> endpoints;
   private Map<Video, Integer> requestNo;
+  private List<Endpoint> ls = new ArrayList<>();
 
   public Parser(String locIn) throws FileNotFoundException {
     this.scanner = new Scanner(new File(locIn));
@@ -17,6 +21,13 @@ public class Parser {
     this.endpoints = new HashMap<>();
     this.requestNo = new HashMap<>();
     parse();
+    Algorithm a = new Algorithm((List)endpoints.values());
+    Set<Cache> s = a.cacheVideos();
+      PrintStream ps = new PrintStream(new File("out/rishi" + locIn ));
+      ps.println(s.size());
+      for(Cache c:s) {
+          ps.println(c.getId() + " " + );
+      }
   }
 
   private void parse() {
@@ -50,6 +61,7 @@ public class Parser {
         current.addCache(nowCache, speed);
       }
       endpoints.put(j, current);
+      ls.add(current);
     }
 
     for (int n = 0; n < noOfReqDesc; n++) {
