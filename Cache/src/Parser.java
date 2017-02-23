@@ -8,12 +8,14 @@ public class Parser {
   private Map<Integer, Cache> caches;
   private Map<Integer, Video> videos;
   private Map<Integer, Endpoint> endpoints;
+  private Map<Video, Integer> requestNo;
 
   public Parser(String locIn) throws FileNotFoundException {
     this.scanner = new Scanner(new File(locIn));
     this.caches = new HashMap<>();
     this.videos = new HashMap<>();
     this.endpoints = new HashMap<>();
+    this.requestNo = new HashMap<>();
     parse();
   }
 
@@ -31,7 +33,9 @@ public class Parser {
 
     for (int i = 0; i < noOfVideos; i++) {
       int size = scanner.nextInt();
-      videos.put(i, new Video(i, size));
+      Video video = new Video(i, size);
+      videos.put(i,video);
+      requestNo.put(video,0);
     }
 
     for (int j = 0; j < noOfEndpoints; j++) {
@@ -55,6 +59,9 @@ public class Parser {
       Endpoint currentEndPoint = endpoints.get(endPoint);
       Video currentVid = videos.get(videoNo);
       currentEndPoint.addVidReq(currentVid, req);
+      int oldReq = requestNo.get(currentVid);
+      int newReq = req + oldReq;
+      requestNo.replace(currentVid,oldReq,newReq);
     }
     System.out.println();
   }
