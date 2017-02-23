@@ -26,7 +26,7 @@ public class Parser {
       PrintStream ps = new PrintStream(new File("out/rishi" + locIn ));
       ps.println(s.size());
       for(Cache c:s) {
-          ps.println(c.getId() + " " + );
+          ps.println(c.getId() + " " + c.getVideos());
       }
   }
 
